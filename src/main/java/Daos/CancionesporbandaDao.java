@@ -25,7 +25,7 @@ public class CancionesporbandaDao {
             pstmt.setString(1, banda);
             try (ResultSet rs = pstmt.executeQuery();) {
 
-                if (rs.next()) {
+                while (rs.next()) {
                     Canciones cancionesporb = new Canciones();
                     cancionesporb.setIdCancion(rs.getInt(1));
                     cancionesporb.setNombre_cancion(rs.getString(2));

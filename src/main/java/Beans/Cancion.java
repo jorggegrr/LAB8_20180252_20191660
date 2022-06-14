@@ -14,12 +14,6 @@ public class Cancion {
 
     }
 
-    public Cancion(int idCancion, String nombre_cancion, String banda){
-        this.idCancion = idCancion;
-        this.nombre_cancion = nombre_cancion;
-        this.banda = banda;
-    }
-
     public int getIdCancion() {
         return idCancion;
     }
