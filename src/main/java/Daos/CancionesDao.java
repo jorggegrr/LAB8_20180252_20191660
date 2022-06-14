@@ -36,4 +36,33 @@ public class CancionesDao {
         return listaCanciones;
     }
 
+    public void Favorito(Canciones canciones) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/hr";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE jobs SET job_title = ?, min_salary = ?, max_salary = ? where job_id = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            //pstmt.setString(1, job.getJobTitle());
+            //pstmt.setInt(2, job.getMinSalary());
+            //pstmt.setInt(3, job.getMaxSalary());
+            //pstmt.setString(4, job.getJobId());
+            //pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

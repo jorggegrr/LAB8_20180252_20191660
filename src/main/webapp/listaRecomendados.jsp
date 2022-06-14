@@ -50,7 +50,7 @@
                 </td>
                 <td><%=cancion.getBanda()%>
                 </td>
-                <td><a class="btn btn-success" href="… ">Más de la banda</a>
+                <td><a class="btn btn-success" href="<%=request.getContextPath()%>/listaCancionesporbanda?action=cancionporbanda&id=<%=cancion.getBanda()%>" style="float: right">Más de la banda</a>
                 </td>
             </tr>
             <% i++;
