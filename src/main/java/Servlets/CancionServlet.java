@@ -7,22 +7,17 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "CancionServlet", value = "/CancionServlet")
+@WebServlet(name = "CancionServlet", value = {"/CancionServlet", "/listaRecomendados"})
 public class CancionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CancionDao cancionDao = new CancionDao();
 
-        switch (action) {
-            case "listar" -> {
-                request.setAttribute("listaCanciones", cancionDao.listarCanciones_recomen());
+        request.setAttribute("listaRecomendados", cancionDao.listarCanciones_recomen());
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("listaRecomendados.jsp");
-                requestDispatcher.forward(request, response);
-            }
-        }
+        RequestDispatcher view =request.getRequestDispatcher("listaRecomendados.jsp");
+        view.forward(request,response);
     }
 
     @Override
