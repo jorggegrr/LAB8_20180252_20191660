@@ -5,8 +5,6 @@ import Beans.Tour;
 import java.sql.*;
 import java.util.ArrayList;
 import Beans.Canciones;
-import java.sql.*;
-import java.util.ArrayList;
 public class CancionesDao {
     private static String user = "root";
     private static String pass = "root";
