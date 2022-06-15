@@ -1,4 +1,5 @@
 <%@ page import="Beans.Canciones" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<Beans.Canciones>" scope="request" id="listaCanciones"/>
 <html>
@@ -23,6 +24,8 @@
                         <th>ID</th>
                         <th>CANCION</th>
                         <th>BANDA</th>
+                        <th>Ver</th>
+
                     </thead>
                     <%
                         for (Canciones canciones : listaCanciones) {
@@ -33,6 +36,22 @@
                         <td><%=canciones.getNombre_cancion()%>
                         </td>
                         <td><%=canciones.getBanda()%>
+                        </td>
+                        <td>
+                            <%
+                                if (Objects.equals(canciones.getEstado(), "no")) {
+
+                            %>
+                            <a href="<%=request.getContextPath()%>/listaCanciones?a=favorito&id=<%=canciones.getIdCancion()%>&estado=<%=canciones.getEstado()%>"
+                               class="btn btn-success">Like</a>
+                            <% }
+                                else {
+                            %>
+                            <a  href="<%=request.getContextPath()%>/listaCanciones?a=favorito&id=<%=canciones.getIdCancion()%>&estado=<%=canciones.getEstado()%>"
+                                class="btn btn-danger">Unlike</a>
+                            <%
+                                }
+                            %>
                         </td>
 
                     </tr>

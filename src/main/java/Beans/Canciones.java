@@ -4,10 +4,13 @@ public class Canciones {
     private int idCancion;
     private String nombre_cancion;
     private String banda;
-    public Canciones(int idCancion, String nombre_cancion, String banda) {
+    private String estado;
+    public Canciones(int idCancion, String nombre_cancion, String banda, String estado) {
         this.idCancion = idCancion;
         this.nombre_cancion = nombre_cancion;
         this.banda = banda;
+        this.estado = estado;
+
     }
     public int getIdCancion() {
         return idCancion;
@@ -31,5 +34,13 @@ public class Canciones {
 
     public void setBanda(String banda) {
         this.banda = banda;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
