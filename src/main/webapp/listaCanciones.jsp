@@ -23,7 +23,8 @@
                         <th>ID</th>
                         <th>CANCION</th>
                         <th>BANDA</th>
-                        <th>Ver</th>
+                        <th>FAVORITOS</th>
+                        <th>AGREGAR</th>
 
                     </thead>
                     <%
@@ -48,6 +49,22 @@
                             %>
                             <a  href="<%=request.getContextPath()%>/listaCanciones?a=favorito&id=<%=canciones.getIdCancion()%>&estado=<%=canciones.getEstado()%>"
                                 class="btn btn-danger">Unlike</a>
+                            <%
+                                }
+                            %>
+                        </td>
+                        <td>
+                            <%
+                                if (Objects.equals(canciones.getEstado(), "no")) {
+
+                            %>
+                            <a href="<%=request.getContextPath()%>/listaCanciones?a=agregaralista&id=<%=canciones.getIdCancion()%>&estado=<%=canciones.getEstado()%>"
+                               class="btn btn-success">+</a>
+                            <% }
+                            else {
+                            %>
+                            <a  href="<%=request.getContextPath()%>/listaCanciones?a=agregaralista&id=<%=canciones.getIdCancion()%>&estado=<%=canciones.getEstado()%>"
+                                class="btn btn-danger">-</a>
                             <%
                                 }
                             %>

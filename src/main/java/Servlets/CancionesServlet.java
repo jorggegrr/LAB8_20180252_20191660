@@ -38,6 +38,12 @@ public class CancionesServlet extends HttpServlet {
                 cancionesDao.añadirFavorito(id, estado);
                 response.sendRedirect(request.getContextPath() + "/listaCanciones");
             }
+            case "agregaralista" -> {
+                String id = request.getParameter("id");
+                String estado = request.getParameter("estado");
+                cancionesDao.añadirFavorito(id, estado);
+                response.sendRedirect(request.getContextPath() + "/listaCanciones");
+            }
         }
 
     }

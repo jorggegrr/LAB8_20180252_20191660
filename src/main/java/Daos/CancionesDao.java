@@ -68,4 +68,32 @@ public class CancionesDao {
 
     }
 
+    public void añadirlista(String id, String estado) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "update cancion set lista = ? where idcancion ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(2, id);
+            if (Objects.equals(estado, "")) {
+                pstmt.setString(1, s);
+            }
+            else {
+                pstmt.setString(1, n);
+            }
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
