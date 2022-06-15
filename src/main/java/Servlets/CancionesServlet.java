@@ -19,12 +19,26 @@ public class CancionesServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CancionesDao cancionesDao = new CancionesDao();
-        ArrayList<Canciones> listaCanciones = cancionesDao.obtenerListaCanciones();
 
-        request.setAttribute("listaCanciones",listaCanciones);
+        switch (action) {
+            case "listar" -> {
+                ArrayList<Canciones> listaCanciones = cancionesDao.obtenerListaCanciones();
 
-        RequestDispatcher view =request.getRequestDispatcher("listaCanciones.jsp");
-        view.forward(request,response);
+                request.setAttribute("listaCanciones",listaCanciones);
+
+                RequestDispatcher view =request.getRequestDispatcher("listaCanciones.jsp");
+                view.forward(request,response);
+            }
+            case "favorito" -> {
+                String id = request.getParameter("id");
+                String estado = request.getParameter("estado");
+                cancionesDao.añadirFavorito(id, estado);
+                response.sendRedirect(request.getContextPath() + "/listaCanciones");
+            }
+        }
+
     }
 }

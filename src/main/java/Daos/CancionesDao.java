@@ -4,12 +4,15 @@ import Beans.Tour;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import Beans.Canciones;
 public class CancionesDao {
     private static String user = "root";
     private static String pass = "root";
     private static String url = "jdbc:mysql://localhost:3306/lab6sw1?serverTimezone=America/Lima";
-
+    private static String s = "si";
+    private static String n = "no";
 
     public ArrayList<Canciones> obtenerListaCanciones(){
         try {
@@ -26,8 +29,9 @@ public class CancionesDao {
                 int idCancion = rs.getInt(1);
                 String nombre_cancion = rs.getString(2);
                 String banda = rs.getString(3);
+                String estado = rs.getString(4);
 
-                listaCanciones.add(new Canciones(idCancion,nombre_cancion,banda));
+                listaCanciones.add(new Canciones(idCancion,nombre_cancion,banda, estado));
             }
 
         } catch (SQLException e) {
@@ -36,11 +40,7 @@ public class CancionesDao {
         return listaCanciones;
     }
 
-    public void Favorito(Canciones canciones) {
-
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/hr";
+    public void añadirFavorito(String id, String estado) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -48,16 +48,19 @@ public class CancionesDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE jobs SET job_title = ?, min_salary = ?, max_salary = ? where job_id = ?";
+        String sql = "UPDATE cancion set cancion_favorita = ? where idcancion = ?";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
-            //pstmt.setString(1, job.getJobTitle());
-            //pstmt.setInt(2, job.getMinSalary());
-            //pstmt.setInt(3, job.getMaxSalary());
-            //pstmt.setString(4, job.getJobId());
-            //pstmt.executeUpdate();
+            pstmt.setString(2, id);
+            if (Objects.equals(estado, "no")) {
+                pstmt.setString(1, s);
+            }
+            else {
+                pstmt.setString(1, n);
+            }
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
