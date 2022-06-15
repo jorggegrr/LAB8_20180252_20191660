@@ -12,6 +12,11 @@ public class Canciones {
         this.estado = estado;
 
     }
+
+    public Canciones() {
+
+    }
+
     public int getIdCancion() {
         return idCancion;
     }
